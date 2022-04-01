@@ -1,6 +1,7 @@
 import pytest
 import time
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 @pytest.fixture
 def setUp():
@@ -20,3 +21,8 @@ def test_searchProduct(setUp):
     driver.find_element_by_name("q").send_keys(product)
     time.sleep(1)
     driver.find_element_by_class_name("L0Z3Pu").click()
+    action = ActionChains(driver)
+    action.context_click(driver.find_element_by_name("q"))
+    action.perform()
+
+    time.sleep(1)
